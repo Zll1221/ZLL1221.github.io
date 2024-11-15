@@ -1,0 +1,458 @@
+/* 全局样式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Microsoft YaHei', sans-serif;
+    line-height: 1.6;
+}
+
+/* 导航栏样式 */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+.nav-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo {
+    height: 50px;
+}
+
+.slogan {
+    display: flex;
+    align-items: center;
+}
+
+.artistic-text {
+    font-size: 0.9em;  /* 减小字体大小 */
+    font-family: 'STXingkai', 'KaiTi', cursive;  /* 使用行楷或楷体字体 */
+    color: #4a4a4a;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    background: linear-gradient(45deg, #333333, #666666);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+    .artistic-text {
+        font-size: 0.8em;  /* 在移动设备上进一步减小字体 */
+    }
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.1em;
+}
+
+/* 轮播图样式 */
+.swiper {
+    margin-top: 70px;
+    width: 100%;
+    height: 500px;
+}
+
+.swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slide-caption {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 1.5em;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* 聊天区域样式 */
+.chat-section {
+    padding: 40px 20px;
+    background-color: #f5f5f5;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.chat-container {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.chat-header {
+    background: #4CAF50;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.chat-messages {
+    height: 300px;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.chat-input {
+    display: flex;
+    padding: 15px;
+    border-top: 1px solid #eee;
+}
+
+.chat-input textarea {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-right: 10px;
+    resize: none;
+}
+
+.chat-input button {
+    padding: 10px 20px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* 页脚样式 */
+footer {
+    background: #333;
+    color: white;
+    padding: 40px 20px;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.contact-info {
+    flex: 1;
+}
+
+.contact-info h3 {
+    margin-bottom: 20px;
+}
+
+.contact-info p {
+    margin: 10px 0;
+}
+
+.social-links {
+    display: flex;
+    gap: 30px;  /* 增加图标之间的间距 */
+    margin-right: auto;  /* 将图标组靠左对齐 */
+    margin-left: 50px;  /* 从左边留出一些空间 */
+}
+
+.social-links a {
+    color: white;
+    font-size: 2em;  /* 增大图标尺寸 */
+    transition: transform 0.3s ease;  /* 添加悬停动画效果 */
+}
+
+.social-links a:hover {
+    transform: scale(1.1);  /* 悬停时略微放大 */
+}
+
+.copyright {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #555;
+}
+
+/* 模态框样式 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1001;
+}
+
+.modal-content {
+    background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    padding: 30px;
+    max-width: 800px;
+    margin: 50px auto;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.modal-content h2 {
+    color: #2c3e50;  /* 深蓝灰色标题 */
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+}
+
+.modal-content h3 {
+    color: #34495e;  /* 稍浅的蓝灰色子标题 */
+    font-size: 1.4em;
+    margin: 25px 0 15px 0;
+}
+
+.modal-content h4 {
+    color: #2980b9;  /* 亮蓝色小标题 */
+    font-size: 1.2em;
+    margin: 20px 0 10px 0;
+}
+
+.modal-content p {
+    color: #576574;  /* 优雅的深灰色文字 */
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.service-intro ul, .intro-content ul {
+    color: #576574;
+    margin: 15px 0;
+    padding-left: 20px;
+}
+
+.service-features li {
+    margin: 15px 0;
+    padding-left: 5px;
+}
+
+.service-features li strong {
+    color: #2980b9;  /* 突出显示重点文字 */
+    font-weight: 600;
+}
+
+/* 添加hover效果 */
+.service-features li:hover {
+    background-color: #f8f9fa;
+    transform: translateX(5px);
+    transition: all 0.3s ease;
+}
+
+.close-modal {
+    float: right;
+    font-size: 28px;
+    cursor: pointer;
+    color: #34495e;
+    transition: color 0.3s ease;
+}
+
+.close-modal:hover {
+    color: #e74c3c;
+}
+
+.services-content, .intro-content {
+    margin-top: 20px;
+}
+
+.service-features li, .intro-content li {
+    margin: 10px 0;
+    list-style-position: inside;
+}
+
+/* 加载动画 */
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 返回顶部按钮 */
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #3498db;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: none;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.back-to-top:hover {
+    background: #2980b9;
+    transform: translateY(-3px);
+}
+
+/* 优化聊天界面 */
+.chat-container {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: #3498db;
+    color: white;
+}
+
+.chat-controls button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+    margin-left: 10px;
+}
+
+.welcome-message {
+    padding: 15px;
+    background: #f8f9fa;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+.input-controls {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+.char-count {
+    font-size: 12px;
+    color: #666;
+    margin-right: 10px;
+}
+
+/* 聊天消息气泡样式 */
+.message {
+    margin: 10px 0;
+    max-width: 80%;
+    clear: both;
+}
+
+.user-message {
+    float: right;
+    background-color: #DCF8C6;  /* 用户消息气泡背景色 */
+    padding: 10px 15px;
+    border-radius: 15px 15px 0 15px;
+    margin-left: 20%;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.bot-message {
+    float: left;
+    background-color: #E3F2FD;  /* 改为浅蓝色背景 */
+    color: #1565C0;  /* 蓝色文字 */
+    padding: 10px 15px;
+    border-radius: 15px 15px 15px 0;
+    margin-right: 20%;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    border: 1px solid #BBDEFB;  /* 添加浅蓝色边框 */
+}
+
+/* 修改欢迎消息样式，保持与AI消息一致 */
+.welcome-message {
+    background-color: #E3F2FD;
+    color: #1565C0;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 15px 15px 15px 0;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    clear: both;
+    float: left;
+    max-width: 80%;
+    border: 1px solid #BBDEFB;
+}
+
+/* 清除浮动 */
+.chat-messages::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+/* 消息时间戳样式 */
+.message-time {
+    font-size: 0.8em;
+    color: #999;
+    margin-top: 5px;
+    clear: both;
+}
+
+.user-message .message-time {
+    text-align: right;
+}
+
+.bot-message .message-time {
+    text-align: left;
+} 

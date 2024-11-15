@@ -157,6 +157,36 @@ async function sendUserMessage() {
     }
 }
 
+// 添加格式化AI回复的函数
+function formatAIResponse(response) {
+    // 添加换行
+    response = response.replace(/\n/g, '<br>');
+    
+    // 加粗重要信息
+    response = response.replace(/【(.*?)】/g, '<strong>$1</strong>');
+    
+    // 添加重点标记
+    response = response.replace(/\*(.*?)\*/g, '<em>$1</em>');
+    
+    return response;
+}
+
+// 添加CSS样式
+const style = document.createElement('style');
+style.textContent = `
+    .typing-dots {
+        display: inline-block;
+        animation: typing 1s infinite;
+    }
+    
+    @keyframes typing {
+        0% { opacity: .2; }
+        20% { opacity: 1; }
+        100% { opacity: .2; }
+    }
+`;
+document.head.appendChild(style);
+
 // 修改添加消息的函数
 function addMessage(type, content) {
     const messageDiv = document.createElement('div');
@@ -190,17 +220,15 @@ function addMessage(type, content) {
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
-// 导航栏滚动效果
+// 修改导航栏滚动效果
 let lastScrollTop = 0;
 window.addEventListener('scroll', () => {
     const navbar = document.querySelector('.navbar');
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     
-    if (scrollTop > lastScrollTop) {
-        navbar.style.top = '-80px';
-    } else {
-        navbar.style.top = '0';
-    }
+    // 移除向上滑动显示导航栏的效果
+    navbar.style.top = '0';  // 保持导航栏始终在顶部
+    
     lastScrollTop = scrollTop;
 });
 
@@ -290,4 +318,181 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
-}); 
+});
+
+// Lightbox 功能
+document.addEventListener('DOMContentLoaded', function() {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeLightbox = document.querySelector('.close-lightbox');
+
+    // 为所有可放大的图片添加点击事件
+    document.querySelectorAll('.zoomable').forEach(img => {
+        img.addEventListener('click', function(e) {
+            e.preventDefault();
+            lightbox.style.display = 'block';
+            lightboxImg.src = this.src;
+        });
+    });
+
+    // 点击关闭按钮关闭 lightbox
+    closeLightbox.addEventListener('click', function() {
+        lightbox.style.display = 'none';
+    });
+
+    // 点击背景关闭 lightbox
+    lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox) {
+            lightbox.style.display = 'none';
+        }
+    });
+
+    // ESC 键关闭 lightbox
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && lightbox.style.display === 'block') {
+            lightbox.style.display = 'none';
+        }
+    });
+});
+
+// 修改联系方式的动画触发
+document.addEventListener('DOMContentLoaded', function() {
+    const contactLink = document.querySelector('a[href="#contact-section"]');
+    const contactTitle = document.querySelector('.contact-info h3');
+    const contactIcons = document.querySelectorAll('.contact-info i');
+    const contactTexts = document.querySelectorAll('.contact-text');
+    const socialIcons = document.querySelectorAll('.social-links a i');
+
+    // 触发所有动画的函数
+    function triggerAllAnimations() {
+        // 标题动画
+        contactTitle.classList.remove('highlight-animation');
+        void contactTitle.offsetWidth;
+        contactTitle.classList.add('highlight-animation');
+
+        // 联系方式图标和文本动画
+        contactIcons.forEach((icon, index) => {
+            setTimeout(() => {
+                icon.classList.remove('icon-highlight');
+                void icon.offsetWidth;
+                icon.classList.add('icon-highlight');
+            }, index * 100); // 添加延迟，使动画依次触发
+        });
+
+        // 联系方式文本动画
+        contactTexts.forEach((text, index) => {
+            setTimeout(() => {
+                text.classList.remove('highlight-animation');
+                void text.offsetWidth;
+                text.classList.add('highlight-animation');
+            }, index * 100); // 添加延迟，使动画依次触发
+        });
+
+        // 社交媒体图标动画
+        socialIcons.forEach((icon, index) => {
+            setTimeout(() => {
+                icon.classList.remove('icon-highlight');
+                void icon.offsetWidth;
+                icon.classList.add('icon-highlight');
+            }, index * 100); // 添加延迟，使动画依次触发
+        });
+    }
+
+    // 点击导航链接时的处理
+    contactLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // 平滑滚动到页脚
+        document.querySelector('#contact-section').scrollIntoView({
+            behavior: 'smooth'
+        });
+
+        // 等待滚动完成后触发动画
+        setTimeout(triggerAllAnimations, 500); // 给滚动预留时间
+    });
+
+    // 为各元素添加独立的悬停效果
+    contactIcons.forEach(icon => {
+        icon.addEventListener('mouseenter', function() {
+            if (!this.classList.contains('icon-highlight')) {
+                this.classList.add('icon-highlight');
+            }
+        });
+        icon.addEventListener('animationend', function() {
+            this.classList.remove('icon-highlight');
+        });
+    });
+
+    contactTexts.forEach(text => {
+        text.addEventListener('mouseenter', function() {
+            if (!this.classList.contains('highlight-animation')) {
+                this.classList.add('highlight-animation');
+            }
+        });
+        text.addEventListener('animationend', function() {
+            this.classList.remove('highlight-animation');
+        });
+    });
+
+    socialIcons.forEach(icon => {
+        icon.addEventListener('mouseenter', function() {
+            if (!this.classList.contains('icon-highlight')) {
+                this.classList.add('icon-highlight');
+            }
+        });
+        icon.addEventListener('animationend', function() {
+            this.classList.remove('icon-highlight');
+        });
+    });
+});
+
+// 添加字数统计和回车发送功能
+document.addEventListener('DOMContentLoaded', function() {
+    const userInput = document.getElementById('userInput');
+    const charCount = document.querySelector('.char-count');
+    const sendButton = document.getElementById('sendMessage');
+
+    // 更新字数统计
+    function updateCharCount() {
+        const length = userInput.value.length;
+        charCount.textContent = `${length}/500`;
+        // 如果超过限制，改变颜色提示
+        if (length >= 500) {
+            charCount.style.color = '#ff4444';
+        } else {
+            charCount.style.color = '#666';
+        }
+    }
+
+    // 重置字数统计
+    function resetCharCount() {
+        charCount.textContent = '0/500';
+        charCount.style.color = '#666';
+    }
+
+    // 监听输入事件
+    userInput.addEventListener('input', updateCharCount);
+
+    // 监听回车键发送
+    userInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && !e.shiftKey) {  // 按下Enter但不按Shift
+            e.preventDefault();  // 阻止默认的换行行为
+            if (userInput.value.trim()) {  // 确保输入不为空
+                sendButton.click();  // 触发发送按钮的点击事件
+                resetCharCount();    // 重置字数统计
+            }
+        }
+    });
+
+    // 监听发送按钮点击
+    sendButton.addEventListener('click', function() {
+        if (userInput.value.trim()) {
+            // 发送消息的逻辑...
+            resetCharCount();  // 重置字数统计
+        }
+    });
+
+    // 初始化字数统计
+    resetCharCount();
+});
+  

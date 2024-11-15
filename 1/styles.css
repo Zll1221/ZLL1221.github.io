@@ -66,12 +66,31 @@ body {
     display: flex;
     list-style: none;
     gap: 30px;
+    margin: 0;
+    padding: 0;
 }
 
 .nav-links a {
     text-decoration: none;
     color: #333;
     font-size: 1.1em;
+    position: relative;
+    transition: color 0.3s;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #3498db;
+    transition: width 0.3s;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
 }
 
 /* 轮播图样式 */
@@ -100,7 +119,7 @@ body {
 /* 聊天区域样式 */
 .chat-section {
     padding: 40px 20px;
-    background-color: #f5f5f5;
+    background: linear-gradient(to bottom, #f8f9fa, #e9ecef);  /* 渐变背景 */
 }
 
 .container {
@@ -109,50 +128,113 @@ body {
 }
 
 .chat-container {
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     max-width: 800px;
     margin: 0 auto;
+    border: 1px solid rgba(52, 152, 219, 0.2);  /* 添加淡蓝色边框 */
 }
 
 .chat-header {
-    background: #4CAF50;
+    background: linear-gradient(135deg, #3498db, #2980b9);
     color: white;
-    padding: 15px;
+    padding: 15px 20px;
     text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chat-header span {
     font-size: 1.2em;
+    font-weight: 500;
 }
 
 .chat-messages {
-    height: 300px;
+    height: 350px;  /* 增加高度 */
     padding: 20px;
     overflow-y: auto;
+    background: rgba(255, 255, 255, 0.8);
 }
 
 .chat-input {
-    display: flex;
-    padding: 15px;
-    border-top: 1px solid #eee;
+    padding: 15px 20px;
+    background: #f8f9fa;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    position: relative;  /* 为绝对定位的子元素提供参考 */
 }
 
 .chat-input textarea {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-right: 10px;
+    width: 100%;  /* 改为100%宽度 */
+    padding: 12px 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
     resize: none;
+    min-height: 45px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: white;
+    margin-bottom: 10px;  /* 添加底部间距 */
 }
 
-.chat-input button {
-    padding: 10px 20px;
-    background: #4CAF50;
+.chat-input textarea:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+    outline: none;
+}
+
+#sendMessage {
+    background: linear-gradient(135deg, #3498db, #2980b9);
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 50%;
+    width: 32px;  /* 减小按钮尺寸 */
+    height: 32px;  /* 小按钮尺寸 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#sendMessage i {
+    font-size: 14px;  /* 调整图标大小 */
+}
+
+#sendMessage:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.input-controls {
+    display: flex;
+    justify-content: space-between;  /* 两端对齐 */
+    align-items: center;
+    padding: 0 5px;
+}
+
+.char-count {
+    color: #666;
+    font-size: 12px;
+}
+
+.chat-messages::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background: #3498db;
+    border-radius: 3px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+    background: #2980b9;
 }
 
 /* 页脚样式 */
@@ -166,8 +248,9 @@ footer {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: flex-start;
+    gap: 30px;
 }
 
 .contact-info {
@@ -184,15 +267,33 @@ footer {
 
 .social-links {
     display: flex;
-    gap: 30px;  /* 增加图标之间的间距 */
-    margin-right: auto;  /* 将图标组靠左对齐 */
-    margin-left: 50px;  /* 从左边留出一些空间 */
+    gap: 35px;  /* 增加图标间距 */
+    margin-right: auto;
+    margin-left: -63px;  /* 将-126px改为-63px，向中间移动一半 */
 }
 
 .social-links a {
     color: white;
-    font-size: 2em;  /* 增大图标尺寸 */
-    transition: transform 0.3s ease;  /* 添加悬停动画效果 */
+    font-size: 4em;
+    transition: transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.social-links a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.2);
+    transform: skewX(-30deg);
+    transition: 0.5s;
+}
+
+.social-links a:hover::before {
+    left: 100%;
 }
 
 .social-links a:hover {
@@ -299,34 +400,6 @@ footer {
     list-style-position: inside;
 }
 
-/* 加载动画 */
-.loader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.9);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-}
-
-.spinner {
-    width: 50px;
-    height: 50px;
-    border: 5px solid #f3f3f3;
-    border-top: 5px solid #3498db;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
 /* 返回顶部按钮 */
 .back-to-top {
     position: fixed;
@@ -342,6 +415,13 @@ footer {
     display: none;
     z-index: 1000;
     transition: all 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
 }
 
 .back-to-top:hover {
@@ -398,26 +478,38 @@ footer {
     margin: 10px 0;
     max-width: 80%;
     clear: both;
+    animation: fadeIn 0.3s ease;  /* 添加消息出现动 */
+    word-wrap: break-word;  /* 添加长单词换行 */
+    white-space: pre-wrap;  /* 保���换行和空格 */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .user-message {
     float: right;
-    background-color: #DCF8C6;  /* 用户消息气泡背景色 */
-    padding: 10px 15px;
+    background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+    padding: 12px 18px;
     border-radius: 15px 15px 0 15px;
-    margin-left: 20%;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    margin: 10px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    border: none;
 }
 
 .bot-message {
     float: left;
-    background-color: #E3F2FD;  /* 改为浅蓝色背景 */
-    color: #1565C0;  /* 蓝色文字 */
-    padding: 10px 15px;
+    background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
+    padding: 12px 18px;
     border-radius: 15px 15px 15px 0;
-    margin-right: 20%;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-    border: 1px solid #BBDEFB;  /* 添加浅蓝色边框 */
+    margin: 10px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    border: none;
+}
+
+.message-content {
+    word-break: break-word;  /* 添加文字换行 */
 }
 
 /* 修改欢迎消息样式，保持与AI消息一致 */
@@ -455,4 +547,399 @@ footer {
 
 .bot-message .message-time {
     text-align: left;
-} 
+}
+
+/* 添加响应式设计 */
+@media screen and (max-width: 768px) {
+    .nav-content {
+        flex-direction: column;
+        align-items: center;
+        padding: 5px 10px;
+    }
+    
+    .logo-container {
+        margin-bottom: 10px;
+    }
+    
+    .nav-links {
+        gap: 15px;
+    }
+    
+    .swiper {
+        height: 300px;  /* 移动端降低轮播图高度 */
+    }
+    
+    .modal-content {
+        margin: 20px;
+        padding: 15px;
+    }
+    .social-links {
+        margin-left: 0;  /* 在移动端重置边距 */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .social-links {
+        margin: 20px auto;
+    }
+}
+
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    text-align: center;
+}
+
+.lightbox-content {
+    max-width: 90%;
+    max-height: 90%;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.close-lightbox {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.zoomable {
+    cursor: pointer;
+}
+
+/* 修改模态框标题和关闭按钮的布局 */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modal-header h2 {
+    margin: 0;  /* 移除标题的默认边距 */
+}
+
+.close-modal {
+    font-size: 28px;
+    cursor: pointer;
+    color: #34495e;
+    transition: color 0.3s ease;
+    line-height: 1;  /* 确保垂直对齐 */
+    padding: 0 5px;  /* 增加点击区域 */
+}
+
+.close-modal:hover {
+    color: #e74c3c;
+}
+
+/* 修改高亮动画效果，使其适用于深色背景 */
+@keyframes highlight {
+    0% {
+        color: #ffffff;
+        transform: scale(1);
+        text-shadow: 0 0 0 rgba(255,255,255,0);
+    }
+    50% {
+        color: #ffd700;  /* 金色 */
+        transform: scale(1.1);
+        text-shadow: 0 0 20px rgba(255,215,0,0.8);
+    }
+    100% {
+        color: #ffffff;
+        transform: scale(1);
+        text-shadow: 0 0 0 rgba(255,255,255,0);
+    }
+}
+
+/* 为图标添加高亮动画 */
+@keyframes icon-highlight {
+    0% {
+        color: #ffffff;
+        transform: scale(1);
+        text-shadow: 0 0 0 rgba(255,255,255,0);
+    }
+    50% {
+        color: #ffd700;
+        transform: scale(1.2);
+        text-shadow: 0 0 30px rgba(255,215,0,0.9);
+    }
+    100% {
+        color: #ffffff;
+        transform: scale(1);
+        text-shadow: 0 0 0 rgba(255,255,255,0);
+    }
+}
+
+.highlight-animation {
+    animation: highlight 1.5s ease-in-out;
+}
+
+.icon-highlight {
+    animation: icon-highlight 1.5s ease-in-out;
+}
+
+/* 修改联系信息的样式 */
+.contact-info p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* 为实际的文本内容添加包装器样式 */
+.contact-text {
+    display: inline-block;
+}
+
+/* 修改图标样式 */
+.contact-info i {
+    width: 20px;
+    text-align: center;
+    display: inline-block;
+}
+
+/* 社交媒体图标容器样式调整 */
+.social-links a {
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+/* 清除浮动 */
+.chat-input::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+/* 修改联系信息的动画效果 */
+.contact-info i, .contact-text, .social-links a i {
+    transition: all 0.3s ease;  /* 基础过渡效果 */
+}
+
+/* 修改高亮动画 */
+@keyframes highlight {
+    0% {
+        color: #ffffff;
+        transform: scale(1);
+    }
+    50% {
+        color: #ffd700;
+        transform: scale(1.02);  /* 减小缩放幅度 */
+        text-shadow: 0 0 8px rgba(255,215,0,0.4);  /* 减弱发光效果 */
+    }
+    100% {
+        color: #ffffff;
+        transform: scale(1);
+    }
+}
+
+@keyframes icon-highlight {
+    0% {
+        color: #ffffff;
+        transform: scale(1);
+    }
+    50% {
+        color: #ffd700;
+        transform: scale(1.05);  /* 减小缩放幅度 */
+        text-shadow: 0 0 10px rgba(255,215,0,0.5);  /* 减弱发光效 */
+    }
+    100% {
+        color: #ffffff;
+        transform: scale(1);
+    }
+}
+
+.highlight-animation {
+    animation: highlight 0.5s ease-in-out;  /* 缩短动画时间 */
+}
+
+.icon-highlight {
+    animation: icon-highlight 0.5s ease-in-out;  /* 缩短动画时间 */
+}
+
+/* 添加悬停效果 */
+.contact-text:hover {
+    color: #ffd700;
+    transform: scale(1.02);
+    text-shadow: 0 0 8px rgba(255,215,0,0.4);
+}
+
+.contact-info i:hover, .social-links a i:hover {
+    color: #ffd700;
+    transform: scale(1.05);
+    text-shadow: 0 0 10px rgba(255,215,0,0.5);
+}
+
+/* 添加页面过渡效果 */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* 优化移动端触摸体验 */
+@media (hover: none) {
+    .nav-links a, 
+    .social-links a,
+    button {
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+    }
+}
+
+/* 添加焦状态样式 */
+:focus {
+    outline: 2px solid #3498db;
+    outline-offset: 2px;
+}
+
+/* 优化可访问性 */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+/* 优化移动端导航栏 */
+@media screen and (max-width: 768px) {
+    .nav-content {
+        padding: 5px 10px;  /* 减小内边距 */
+    }
+    
+    .logo {
+        height: 40px;  /* 缩小logo */
+    }
+    
+    .artistic-text {
+        font-size: 0.7em;  /* 进一步缩小标语 */
+    }
+    
+    .nav-links {
+        gap: 10px;  /* 减小导航链接间距 */
+    }
+    
+    .nav-links a {
+        font-size: 0.9em;  /* 缩小导航文字 */
+    }
+}
+
+/* 优化移动端轮播图 */
+@media screen and (max-width: 768px) {
+    .swiper {
+        height: 200px;  /* 降低轮播图高度 */
+        margin-top: 60px;  /* 调整顶部间距 */
+    }
+    
+    .slide-caption {
+        font-size: 1.2em;  /* 缩小轮播图文字 */
+    }
+}
+
+/* 添加页面加载过渡效果 */
+.fade-enter {
+    opacity: 0;
+}
+
+.fade-enter-active {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+/* 优化按钮点击反馈 */
+button {
+    transition: transform 0.1s ease;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+/* 修改轮播图导航按钮样式 */
+.swiper-button-next,
+.swiper-button-prev {
+    color: #fff !important;
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+/* 修改导航按钮的箭头图标 */
+.swiper-button-next:after,
+.swiper-button-prev:after {
+    font-family: "Font Awesome 5 Free" !important;  /* 使用 Font Awesome 图标 */
+    font-weight: 900;
+    font-size: 20px !important;
+}
+
+.swiper-button-next:after {
+    content: "\f054" !important;  /* 右箭头图标 */
+}
+
+.swiper-button-prev:after {
+    content: "\f053" !important;  /* 左箭头图标 */
+}
+
+/* 悬停效果 */
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+    transform: scale(1.1);
+}
+
+/* 分页器样式 */
+.swiper-pagination-bullet {
+    background: #fff;  /* 分页器颜色 */
+    opacity: 0.8;
+}
+
+.swiper-pagination-bullet-active {
+    background: #3498db;  /* 当前页分页器颜色 */
+}
+
+/* 移除按钮点击后的焦点轮廓 */
+button:focus {
+    outline: none;
+}
+
+/* 移除输入框点击后的焦点轮廓 */
+textarea:focus {
+    outline: none;
+}
+
+/* 移除链接点击后的焦点轮廓 */
+a:focus {
+    outline: none;
+}
+
+/* 移除所有元素的焦点轮廓 */
+*:focus {
+    outline: none !important;
+}
+  

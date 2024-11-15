@@ -63,11 +63,11 @@
     <div class="swiper">
         <div class="swiper-wrapper">
             <div class="swiper-slide">
-                <img src="微信图片_20241114211246.jpg" alt="宣传图片1" loading="lazy">
+                <img src="微信图片_20241114211246.jpg" alt="宣传图片1" loading="lazy" class="zoomable">
                 <div class="slide-caption">优质教育资源</div>
             </div>
             <div class="swiper-slide">
-                <img src="微信图片_20241114211255.jpg" alt="宣传图片2">
+                <img src="微信图片_20241114211255.jpg" alt="宣传图片2" class="zoomable">
                 <div class="slide-caption">专业教师团队</div>
             </div>
         </div>
@@ -82,10 +82,6 @@
             <div class="chat-container">
                 <div class="chat-header">
                     <span>转本助手</span>
-                    <div class="chat-controls">
-                        <button class="minimize-chat" title="最小化"><i class="fas fa-minus"></i></button>
-                        <button class="close-chat" title="关闭"><i class="fas fa-times"></i></button>
-                    </div>
                 </div>
                 <div class="chat-messages" id="chatMessages">
                     <div class="welcome-message">
@@ -114,9 +110,18 @@
         <div class="footer-content">
             <div class="contact-info">
                 <h3>联系我们</h3>
-                <p><i class="fas fa-phone"></i> 电话：153-5852-6455</p>
-                <p><i class="fas fa-envelope"></i> 邮箱：2833591937@qq.com</p>
-                <p><i class="fas fa-map-marker-alt"></i> 地址：六合区欣乐路181号金宝商业广场3楼立己专转本</p>
+                <p>
+                    <i class="fas fa-phone"></i>
+                    <span class="contact-text">电话：153-5852-6455</span>
+                </p>
+                <p>
+                    <i class="fas fa-envelope"></i>
+                    <span class="contact-text">邮箱：2833591937@qq.com</span>
+                </p>
+                <p>
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span class="contact-text">地址：六合区欣乐路181号金宝商业广场3楼立己专转本</span>
+                </p>
             </div>
             <div class="social-links">
                 <a href="https://v.douyin.com/CeiGRSjk/" 
@@ -164,7 +169,7 @@
                             <li>认真细致的答疑</li>
                         </ul>
                         
-                        <p>科学的授课模式更好的解决了同学们上课听不懂、课后练不会、知识点记不住的问题。课后的测试以及考前的模拟，能更好的保证每个同学了解自己的知识点掌握程度并通过答疑和练习解决。</p>
+                        <p>科学的课模式更好的解决了同学们上课听不懂、课后练不会、知识点记不住的问题。课后的测试以及考前的模拟，能更好的保证每个同学了解自己的知识点掌握程度并通过答疑和练习解决。</p>
                         
                         <h3>个性化方案</h3>
                         <p>每个人的学习习惯和报考方向是不一样的，立己专转本会根据每个同学的报考意向和自身情况，制定个人化、详细化的学习和报考方，提高学习效率降低个人录取难度。不论从公共课还是专业课方面，立己专转本都通过分析每年的考情变化、考点汇总，用优秀的师资保证了教学质量，也让各位同学不再受自身了解信息不全、准备不充分的影响。</p>
@@ -193,11 +198,13 @@
         </div>
     </div>
 
-    <!-- 修改立己简介弹窗内容 -->
+    <!-- 修改立己简介模态框的结构 -->
     <div id="introModal" class="modal">
         <div class="modal-content">
-            <span class="close-modal" id="closeIntro">&times;</span>
-            <h2>立己简介</h2>
+            <div class="modal-header">
+                <h2>立己简介</h2>
+                <span class="close-modal" id="closeIntro">&times;</span>
+            </div>
             <div class="intro-content">
                 <p>江苏立己教育科技有限公司前身为润宁教育集团，公司深耕高校教培行业是南京市社会培训行业会员单位，涉及领域包括注册会计师、教师资格证、专转本、专升本，专接本等。</p>
                 
@@ -229,5 +236,11 @@
     <!-- 添加资源预加载 -->
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+    <!-- 在body末尾添加 lightbox 容器 -->
+    <div id="lightbox" class="lightbox">
+        <span class="close-lightbox">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+    </div>
 </body>
 </html> 
